@@ -9,6 +9,11 @@
     + 设置数据源(`dataSrouce`)
     + 遵守协议(`UITableViewDataSource`)
     + 实现协议方法(2个required方法)
+
 ```objc
+//返回组数
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+//返回每组行数
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+
 ```
