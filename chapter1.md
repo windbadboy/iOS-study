@@ -39,6 +39,7 @@ UIViewAutoresizingFlexibleWidth    宽度会跟随父控件的宽度进行拉伸
     - 设置位置约束
     - 设置宽度约束 <= 固定值
     - 不用设置高度约束
+    - 约束优先(priority)：越高越优先
     - 约束动画
 ```objc
 //修改宽度约束
