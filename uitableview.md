@@ -11,9 +11,15 @@
     + 实现协议方法(2个required方法)
 
 ```objc
+//五个常用方法
 //返回组数
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 //返回每组行数
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-
+//返回cell（行内容）
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+//返回头文字
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+//返回尾文字
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 ```
