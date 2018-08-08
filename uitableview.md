@@ -5,6 +5,8 @@
     - 任何对象都可以成为数据源(dataSource)
     - UITableView每一行显示的一定是一个Cell
     - `cell.accessoryType=UITableViewAccessoryDisclosureIndicator`:设置cell右边的>
+* 常用属性
+    - `rowHeight`:设置每一行cell的高度(例:`self.tableView.rowHeight=70;`）
 * 使用流程
     + 设置数据源(`dataSrouce`)
     + 遵守协议(`UITableViewDataSource`)
