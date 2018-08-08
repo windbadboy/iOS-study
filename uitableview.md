@@ -10,6 +10,8 @@
     - `sectionHeaderHeight`:设置每组标题高度
     - `sectionFooterHeight`:设置每组尾标题高度
     - `separatorColor`:分隔线颜色设置(设置为透明色:`self.tableView.separatorColor = [UIColor clearColor];`）
+    - `tableHeaderView`:设置表头控件
+    - `tableFooterView`:设置表尾控件
 * 使用流程
     + 设置数据源(`dataSrouce`)
     + 遵守协议(`UITableViewDataSource`)
