@@ -7,6 +7,9 @@
     - `cell.accessoryType=UITableViewAccessoryDisclosureIndicator`:设置cell右边的>
 * 常用属性
     - `rowHeight`:设置每一行cell的高度(例:`self.tableView.rowHeight=70;`）
+    - `sectionHeaderHeight`:设置每组标题高度
+    - `sectionFooterHeight`:设置每组尾标题高度
+    - `separatorColor`:分隔线颜色设置(设置为透明色:`self.tableView.separatorColor = [UIColor clearColor];`）
 * 使用流程
     + 设置数据源(`dataSrouce`)
     + 遵守协议(`UITableViewDataSource`)
