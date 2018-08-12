@@ -25,6 +25,7 @@
     + 设置数据源(`dataSrouce`)
     + 遵守协议(`UITableViewDataSource`)
     + 实现协议方法(2个required方法)
+* 代理(delegate):`UITableViewDelegate`，监听tableview的各种事件。
 
 ```objc
 //五个常用方法
@@ -42,4 +43,22 @@
 * 性能优化
     - 首先去缓存池中找可循环利用的cell（标识要一样）
     - 如果缓存池没有可用cell，创建新cell
-    
+* 自定义cell
+    - 从代码加载
+        - 创建数据模型
+        - 加载字典数据(可选）:`NSArray *dictArray = [NSArray arrayWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"tgs.plist" ofType:nil]];`
+    - 从xib加载
+        - 创建xib布局文件，部署控件；
+        - 创建继承自`UITableViewCell`的类，让xib的类继承自它。
+        - 加载xib：
+```objc
+[self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([BBCell class]) bundle:nil] forCellReuseIdentifier:CELLID];
+```
+        - cell存放所需数据数据模型
+        - cell通过setter方法设置数据
+* 不等高Cell：
+```objc
+    CGSize textMaxSize = CGSizeMake(textW, MAXFLOAT);
+    NSDictionary *textAttr = @{NSFontAttributeName : [UIFont systemFontOfSize:14]};
+    CGFloat textH = [cellModel.text boundingRectWithSize:textMaxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:textAttr context:nil].size.height;
+```
