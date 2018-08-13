@@ -8,6 +8,7 @@
     - 如果要重复利用cell，需要给cell加一个identifer（标识），需要新的cell时，会在cell缓存池寻找标识一样的cell.
     - `[tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:ID]`:根据ID标识注册对应的cell类型为UITableViewCell
     - `dequeueReusableCellWithIdentifier:ID`:这个方法首先根据ID标识去缓存池取可循环利用的cell,如果没有，会判断有没有根据ID标识注册对应的cell类型，如果有注册，会自动创建这种类型的cell，并且绑定ID标识。
+    - 从StoryBoard创建的cell不会调用initwith...方法，而是调用awakeFromNib方法。
 * 常用属性
     - `rowHeight`:设置每一行cell的高度(例:`self.tableView.rowHeight=70;`）
     - `sectionHeaderHeight`:设置每组标题高度
