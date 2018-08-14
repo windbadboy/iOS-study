@@ -65,7 +65,7 @@
 ```
 * 左滑删
  - 系统自带:
- ```objc
+```objc
 //左滑动出现删除
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.wineGroups removeObjectAtIndex:indexPath.row];
@@ -77,4 +77,5 @@
 - (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
     return @"❎";
 }
+
 ```
