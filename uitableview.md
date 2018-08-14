@@ -63,3 +63,18 @@
     NSDictionary *textAttr = @{NSFontAttributeName : [UIFont systemFontOfSize:14]};
     CGFloat textH = [cellModel.text boundingRectWithSize:textMaxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:textAttr context:nil].size.height;
 ```
+* 左滑删
+ - 系统自带:
+ ```objc
+//左滑动出现删除
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self.wineGroups removeObjectAtIndex:indexPath.row];
+
+    [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+}
+
+//删除文字
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return @"❎";
+}
+```
