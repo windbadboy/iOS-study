@@ -64,9 +64,10 @@
     CGFloat textH = [cellModel.text boundingRectWithSize:textMaxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:textAttr context:nil].size.height;
 ```
 * 左滑删
- - 系统自带:
+    - 系统自带:
+    
 ```objc
-//左滑动出现删除
+
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.wineGroups removeObjectAtIndex:indexPath.row];
 
@@ -77,7 +78,6 @@
 - (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
     return @"❎";
 }
-
 ```
  - 自定义删除内容和数量
 ```objc
@@ -91,3 +91,16 @@
     return @[action,action];
 }
 ```
+* cell编辑模式
+    - 进入/退出编辑模式:`[self.tableView setEditing:!self.tableView.isEditing animated:YES];`
+    - 批量删除:
+```objc
+self.tableView.allowsMultipleSelectionDuringEditing = YES;
+    NSMutableArray *willDeleteWine = [NSMutableArray array];
+    for (NSIndexPath *indexPath in self.tableView.indexPathsForSelectedRows) {
+        [willDeleteWine addObject:self.wineGroups[indexPath.row]];
+    }
+    [self.wineGroups removeObjectsInArray:willDeleteWine];
+    [self.tableView reloadData];
+```
+    
