@@ -79,3 +79,15 @@
 }
 
 ```
+ - 自定义删除内容和数量
+```objc
+- (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewRowAction *action = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"移除" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+        [self.wineGroups removeObjectAtIndex:indexPath.row];
+        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+    }];
+    //退出编辑模式
+    self.tableView.editing = NO;
+    return @[action,action];
+}
+```
