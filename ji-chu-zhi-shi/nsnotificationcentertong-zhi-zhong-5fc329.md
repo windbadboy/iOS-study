@@ -15,10 +15,7 @@
      */
     [center addObserver:self selector:@selector(plusClick:) name:@"plusClickNotification" object:nil];
     [center addObserver:self selector:@selector(minusClick:) name:@"minusClickNotification" object:nil];
-```
 
-
-```objc
     //发布通知
     /*
      第1个参数:发送通知消息的名称
@@ -26,4 +23,6 @@
      第3个参数:发送通知消息的附带信息(nil表示不发送附带消息)
      */
     [[NSNotificationCenter defaultCenter] postNotificationName:@"plusClickNotification" object:self];
+    //移除监听
+     [[NSNotificationCenter defaultCenter] removeObserver:self];
 ```
