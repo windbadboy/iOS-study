@@ -1,0 +1,9 @@
+## MVC
+* MVC是一种设计思想，贯穿于整个iOS开发中。
+    - M:Model,模型数据
+    - V:View,视图
+    - C:Control,控制中心
+* MVC特点
+    - View显示的内容，取决于Model。
+    - 只要Model数据改了，View的显示状态会跟着更改。
+    - Control负责初始化Model,并将Model传递给View去解析展示。
