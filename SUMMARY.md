@@ -2,7 +2,9 @@
 
 ## 基础知识
 
-* 基础知识
+* [基础知识](ji-chu-zhi-shi/ji-chu-zhi-shi.md)
+* [UIApplication](ji-chu-zhi-shi/uiapplication.md)
+* [UIWindow](ji-chu-zhi-shi/uiwindow.md)
 
 ## 控件
 
