@@ -7,3 +7,12 @@
 - 导航器跳转分为2种
     - 手动型跳转:需要根据标识手工执行代码(通过控制器拖线的方式进行跳转)
     - 自动型跳转:一般用于跳转前不做任何事情(通过控件拖线的方式进行跳转)
+    
+```objc
+[self performSegueWithIdentifier:@"contactSeg" sender:nil];
+//执行performSegueWithIdentifier方法前会调用下面方法
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    NSLog(@"%@",segue.destinationViewController);
+}
+```
+
