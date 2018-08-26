@@ -14,4 +14,4 @@
         }
         - 通知应用程序代理(appDelegate)，应用程序启动完毕调用didFinishLaunchingWithOptions。
 - 高内聚:在同一个类中，把相同的代码写到同一个方法中。变化的东西当作参数传递。
-    
+    - 任何地点获取控制器:`    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alertController animated:YES completion:nil];`
