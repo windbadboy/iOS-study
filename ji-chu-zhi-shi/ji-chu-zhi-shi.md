@@ -5,7 +5,15 @@
     - 实现代理方法
     - 使用代理的情况
          + 上下级之间，下级要给上级传递数据时，可使用代理。
-- 应用程序启动流程
+    - 写代理的过程
+        - 定义协议:规定成为其代理的对象需要遵守的协议(方法)
+        - 定义代理属性:设置代理属性`@property(nonatomic,weak) id<XZAddViewControllerDelegate> delegate;`
+        - 调用代理方法:确定何时调用代理遵守的协议方法`[self.delegate AddAddVC:self contactModel:contactModel];`
+        - 设置代理:`addVC.delegate = self;`
+        - 遵守协议:`@interface XZContactTableViewController () <XZAddViewControllerDelegate>`
+        - 实现代理(方法)
+        - 应用程序启动流程
+- 启动流程
     - 执行main
     - 执行UIApplicationMain
         - 创建UIApplication对象，并设置它的代理
@@ -26,11 +34,4 @@
     contactTC.accountName = self.accountTextF.text;
 ```
 
-- 写代理的过程
-    - 定义协议
-    - 定义代理属性
-    - 调用代理方法
     
-    - 设置代理
-    - 遵守协议
-    - 实现代理
