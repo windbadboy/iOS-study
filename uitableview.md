@@ -29,28 +29,27 @@
   * 实现协议方法\(2个required方法\)
 * 代理\(delegate\):`UITableViewDelegate`，监听tableview的各种事件。
 * 常用方法
- - 数据源常用方法
+  * 数据源常用方法
+    \`\`\`objc
+    //五个常用方法
+    //返回组数
+* \(NSInteger\)numberOfSectionsInTableView:\(UITableView \*\)tableView
+  //返回每组行数
+* \(NSInteger\)tableView:\(UITableView \*\)tableView numberOfRowsInSection:\(NSInteger\)section
+  //返回cell（行内容）
+* \(UITableViewCell _\)tableView:\(UITableView _\)tableView cellForRowAtIndexPath:\(NSIndexPath \*\)indexPath
+  //返回头文字
+* \(NSString _\)tableView:\(UITableView _\)tableView titleForHeaderInSection:\(NSInteger\)section
+  //返回尾文字
+* \(NSString _\)tableView:\(UITableView _\)tableView titleForFooterInSection:\(NSInteger\)section  
+  \`\`\`
+
+  * 代理常用方法
+
 ```objc
-//五个常用方法
-//返回组数
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-//返回每组行数
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-//返回cell（行内容）
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-//返回头文字
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-//返回尾文字
-- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
-```
-
- - 代理常用方法
-
-  
- ```objc
  //cellForRowAtIndexPath可以获取选中的cell对象
  MyCell *cell = [tableView cellForRowAtIndexPath:indexPath];
- ```
+```
 
 * 性能优化
   * 首先去缓存池中找可循环利用的cell（标识要一样）
@@ -91,6 +90,7 @@
 ```
 
 * 自定义删除内容和数量
+
   ```objc
   - (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
    UITableViewRowAction *action = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"移除" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
