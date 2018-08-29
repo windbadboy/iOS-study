@@ -26,6 +26,7 @@
     * 通知应用程序代理\(appDelegate\)，应用程序启动完毕调用didFinishLaunchingWithOptions。
 * 高内聚:在同一个类中，把相同的代码写到同一个方法中。变化的东西当作参数传递。
   * 任何地点获取控制器:`[[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alertController animated:YES completion:nil];`
+- 低耦合:类与类之间降低关联
 * 数据顺传
   * 在接收数据的控制器定义属性接收数据；`@property (nonatomic,copy) NSString *accountName;`
   * 获取数据要接收的控制器
@@ -35,6 +36,12 @@
     contactTC.accountName = self.accountTextF.text;
     ```
 - 控制器会懒加载（使用才会加载，比如设置控制器view的属性）
+- 应用程序沙盒
+  - layer:所有程序的资源和可以执行文件
+    - Documents:保存持久化数据，itunes同步时会备份该目录。如游戏存档
+    - tmp:存放监时数据
+    - Library/Caches:保存持久化数据，一般存储体积较大
+    - Library/Preference:存储偏好设置，itunes同步时会备份该目录
 
 
 
