@@ -14,9 +14,11 @@
 * [UIScrollView](scrollview.md)
 * [UITableView](uitableview.md)
 * [plist](plist.md)
+* [归档](ji-chu-zhi-shi/gui-dang.md)
 * [MVC](mvc.md)
 * [NSNotificationCenter\(通知中心\)](ji-chu-zhi-shi/nsnotificationcentertong-zhi-zhong-5fc329.md)
 * [KVO](ji-chu-zhi-shi/kvo.md)
 * [UINavigationController](ji-chu-zhi-shi/uinavigationcontroller.md)
+* [UITabBarController](ji-chu-zhi-shi/uitabbarcontroller.md)
 * [UITextField](ji-chu-zhi-shi/uitextfield.md)
 
