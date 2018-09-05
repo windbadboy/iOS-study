@@ -11,6 +11,7 @@
 
 * [Introduction](README.md)
 * [autoresizing与autolayout](chapter1.md)
+* [UIView](ji-chu-zhi-shi/uiview.md)
 * [UIScrollView](scrollview.md)
 * [UITableView](uitableview.md)
 * [plist](plist.md)
