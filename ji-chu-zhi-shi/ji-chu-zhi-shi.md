@@ -42,6 +42,9 @@
     - tmp:存放监时数据
     - Library/Caches:保存持久化数据，一般存储体积较大
     - Library/Preference:存储偏好设置，itunes同步时会备份该目录
-
+- IOS中的事件可以分为3大类型
+  - 触摸事件
+  - 加速计事件
+  - 远程控制事件
 
 
