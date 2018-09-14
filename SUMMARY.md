@@ -7,6 +7,7 @@
 * [UIWindow](ji-chu-zhi-shi/uiwindow.md)
 * [UIStoryBoard](ji-chu-zhi-shi/uistoryboard.md)
 * [UITouch](ji-chu-zhi-shi/uitouch.md)
+* [UIGestureRecognizer](ji-chu-zhi-shi/uigesturerecognizer.md)
 
 ## 控件
 
