@@ -13,4 +13,21 @@
     - 同一个进程内的线程共享进程的资源
 - 多线程
     - 1个进程中可以开启多条线程，每条线程可以并行（同时）执行不同的任务
-    
+    - 同一时间，CPU只能处理1条线程，只有1条线程在工作（执行）
+    - 多线程并发（同时）执行，其实是CPU快速地在多条线程之间调度（切换）
+- 主线程
+    - 一个iOS程序运行后，默认会开启1条线程，称为“主线程”或“UI线程”
+    - 主线程作用
+        - 显示\刷新UI界面
+        - 处理UI事件（比如点击事件、滚动事件、拖拽事件等）
+- 子线程:除了主线程外的其它进程称为子线程。（后台线程、非主线程）
+
+```swift
+        //print main thread
+        let mainThread = Thread.main
+        print(mainThread)
+        //print current using thread
+        print(Thread.current)
+        //judge whether is in main thread,return true or false
+        print(Thread.isMainThread)
+```
