@@ -10,6 +10,10 @@
 * [UIGestureRecognizer](ji-chu-zhi-shi/uigesturerecognizer.md)
 * [Quartz2D](ji-chu-zhi-shi/quartz2d.md)
 
+## 网络多线程
+
+* [线程](ji-chu-zhi-shi/xian-cheng.md)
+
 ## 控件
 
 * [Introduction](README.md)
