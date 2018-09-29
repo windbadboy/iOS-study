@@ -8,6 +8,7 @@
 * [UIStoryBoard](ji-chu-zhi-shi/uistoryboard.md)
 * [UITouch](ji-chu-zhi-shi/uitouch.md)
 * [UIGestureRecognizer](ji-chu-zhi-shi/uigesturerecognizer.md)
+* [Quartz2D](ji-chu-zhi-shi/quartz2d.md)
 
 ## 控件
 
