@@ -31,3 +31,4 @@
         //judge whether is in main thread,return true or false
         print(Thread.isMainThread)
 ```
+
