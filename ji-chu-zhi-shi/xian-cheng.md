@@ -42,7 +42,32 @@
 - 原子性、非原子性
     - atomic:原子性，安全的(内部会对setter方法加锁）
     - noatomic:非原子性，不安全的
+
+```objc
+    NSURL *url = [NSURL URLWithString:@"http://img3.duitang.com/uploads/item/201509/30/20150930210729_CYP3F.jpeg"];
     
+    //02把图片的二进制数据下载到本地
+    NSDate *start = [NSDate date];
+    NSData *imageData = [NSData dataWithContentsOfURL:url];
+    NSDate *end = [NSDate date];
+    NSLog(@"%f",[end timeIntervalSinceDate:start]);
+    //03把图片的二进制数据转换为UIimage
+    UIImage *image = [UIImage imageWithData:imageData];
+    
+    //04返回主线程执行
+   // [self performSelectorOnMainThread:@selector(showPics:) withObject:image waitUntilDone:YES];
+   // [self performSelector:@selector(showPics:) onThread:[NSThread mainThread] withObject:image waitUntilDone:YES];
+    [self.imageView performSelector:@selector(setImage:) onThread:[NSThread mainThread] withObject:image waitUntilDone:YES];
+
+}
+
+
+- (void) showPics:(UIImage *)image {
+    NSLog(@"%@",[NSThread currentThread]);
+     self.imageView.image = image;
+}
+
+```    
 - GCD
     - 核心概念
         - 任务:执行什么操作
@@ -51,8 +76,119 @@
         - 创建队列
         - 封装任务把任务添加到队列
             - 使用函数来封装任务（同步|异步）
-                - 同步：不具备开启新线程的能力，以同步方式执行
+                - 同步：不具备开启新线程的能力，以同步（执行完当前任务后才会往后执行）方式执行
                 - 异步：具备开启新线程的能力，以异步方式执行
                     - 并发队列：多个任务并发（同时）执行
+                        自己创建队列:`dispatch_queue_create concurrent`
+                        全局并发队列:`dispatch_get_global_queue`
                     - 串行队列：让任务一个接着一个地执行。（一个任务执行完毕后，再执行下一个任务）
+                    
+```objc
+//异步函数 + 并发执行（会开多条新线程,并发执行）
+- (void)asyncConcurrent {
+    
+    /**
+     创建队列
+
+     param label 给队列起个名字
+     param attr#> 类型
+                    DISPATCH_QUEUE_CONCURRENT   并发队列
+                    DISPATCH_QUEUE_SERIAL   串行队列
+     return 队列
+     */
+    dispatch_queue_t queue = dispatch_queue_create("club.badteacher.www.DownloadQueue", DISPATCH_QUEUE_CONCURRENT);
+    
+    
+    /**
+     封装任务，把任务添加到队列
+
+     
+     param queue#> 队列
+     param void 代码块
+     return 无
+     */
+    dispatch_async(queue, ^{
+        NSLog(@"1----%@",[NSThread currentThread]);
+    });
+    dispatch_async(queue, ^{
+        NSLog(@"2----%@",[NSThread currentThread]);
+    });
+    dispatch_async(queue, ^{
+        NSLog(@"3----%@",[NSThread currentThread]);
+    });
+    dispatch_async(queue, ^{
+        NSLog(@"4----%@",[NSThread currentThread]);
+    });
+}
+```
+
+- 队列组
+```objc
+    //create a group
+    dispatch_group_t group = dispatch_group_create();
+    
+    //create a queue
+    dispatch_queue_t queue = dispatch_queue_create("downloadPic", DISPATCH_QUEUE_CONCURRENT);
+    
+    //execute download task
+    dispatch_group_async(group, queue, ^{
+        NSURL *url = [NSURL URLWithString:@"http://img3.duitang.com/uploads/item/201509/30/20150930210729_CYP3F.jpeg"];
+        NSData *data = [NSData dataWithContentsOfURL:url];
+        self.image1 = [UIImage imageWithData:data];
+        NSLog(@"---%@---",[NSThread currentThread]);
+
+
+    });
+    dispatch_group_async(group, queue, ^{
+        NSURL *url = [NSURL URLWithString:@"http://img3.duitang.com/uploads/item/201509/30/20150930210729_CYP3F.jpeg"];
+        NSData *data = [NSData dataWithContentsOfURL:url];
+        self.image2 = [UIImage imageWithData:data];
+    });
+    
+    dispatch_group_notify(group, queue, ^{
+        // start context
+        UIGraphicsBeginImageContext(CGSizeMake(375, 667));
+        
+        //drawing
+        [self.image1 drawInRect:CGRectMake(0, 0, 300, 150)];
+         [self.image2 drawInRect:CGRectMake(150, 0, 300, 150)];
+        
+        //take the pic
+        UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+        
+        //close context
+        UIGraphicsEndImageContext();
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.imageView.image = image;
+            NSLog(@"---%@---",[NSThread currentThread]);
+        });
+    });
+```
+
+- 单例模式
+
+```objc
+//01 提供一个全局的静态变量（对外界隐藏）
+static XZTool *_instance;
+
+//02 重写alloc方法，保证永远只分配一次存储空间
++ (instancetype)allocWithZone:(struct _NSZone *)zone {
+    //此方法在多线程时可能引发安全问题
+//    @synchronized (self) {
+        //    if (_instance == nil) {
+        //        _instance = [super allocWithZone:zone];
+        //    }
+//    }
+
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _instance = [super allocWithZone:zone];
+    });
+    return _instance;
+}
+//03 提供类方法
++ (instancetype)shareTool {
+    return [[super alloc] init];
+}
+```
     
