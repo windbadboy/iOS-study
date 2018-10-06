@@ -82,6 +82,8 @@
                         自己创建队列:`dispatch_queue_create concurrent`
                         全局并发队列:`dispatch_get_global_queue`
                     - 串行队列：让任务一个接着一个地执行。（一个任务执行完毕后，再执行下一个任务）
+                        自己创建的队列:`dispatch_queue_create_serial`
+                        主队列:`dispatch_get_main_queue`
                     
 ```objc
 //异步函数 + 并发执行（会开多条新线程,并发执行）
@@ -190,5 +192,19 @@ static XZTool *_instance;
 + (instancetype)shareTool {
     return [[super alloc] init];
 }
+
+//04 提供copy方法
+//04 重写copy方法
+
+- (id)copy {
+    return _instance;
+}
+
+- (id)mutableCopy {
+    return _instance;
+}
 ```
-    
+
+- 操作队列
+    - 自定义队列:`[[NSOperationQueue alloc] init]`
+    - 主队列:串行队列，和主线程相关(主阶列中的任务在主线程中扫行) 
