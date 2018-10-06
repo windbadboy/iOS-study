@@ -205,6 +205,6 @@ static XZTool *_instance;
 }
 ```
 
-- 操作队列
+- 操作队列（NSOperation）
     - 自定义队列:`[[NSOperationQueue alloc] init]`
     - 主队列:串行队列，和主线程相关(主阶列中的任务在主线程中扫行) 
