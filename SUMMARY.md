@@ -13,6 +13,7 @@
 ## 网络多线程
 
 * [线程](ji-chu-zhi-shi/xian-cheng.md)
+* [HTTP](ji-chu-zhi-shi/http.md)
 
 ## 控件
 

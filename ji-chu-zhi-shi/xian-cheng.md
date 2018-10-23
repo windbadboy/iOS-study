@@ -206,5 +206,49 @@ static XZTool *_instance;
 ```
 
 - 操作队列（NSOperation）
-    - 自定义队列:`[[NSOperationQueue alloc] init]`
+    - 自定义队列:`[[NSOperationQueue alloc] init]`,默认为并发队列，可以控制为串行队列
+    
     - 主队列:串行队列，和主线程相关(主阶列中的任务在主线程中扫行) 
+```objc
+    //普通
+    //01 创建队列
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    
+    //02 封装操作
+    NSInvocationOperation *op1 = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(download) object:nil];
+    NSInvocationOperation *op2 = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(download) object:nil];
+    
+    //03 把操作添加到队列
+    [queue addOperation:op1];
+    [queue addOperation:op2];
+```
+
+```objc
+    //块操作
+    //01 创建队列
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    
+    //02 封装操作对象
+    NSBlockOperation *op1 = [NSBlockOperation blockOperationWithBlock:^{
+        NSLog(@"---%@---",[NSThread currentThread]);
+    }];
+    NSBlockOperation *op2 = [NSBlockOperation blockOperationWithBlock:^{
+        NSLog(@"---%@---",[NSThread currentThread]);
+    }];
+    
+    //03 把操作加入队列
+    [queue addOperation:op1];
+    [queue addOperation:op2];
+```
+
+- RunLoop与线程
+    - 每条线程都有唯一的一个与之对应的Runloop对象
+    - 主线程的RunLoop已经自动创建好了，子线程的RunLoop需要主动创建
+    - Runloop在第一次获取时创建，在线程结束时销毁
+    
+    - 子线程启动runLoop
+```objc
+NSRunLoop *runloop = [NSRunLoop currentRunLoop];
+[runloop addPort:[NSPort port] forMode:NSDefaultRunLoopMode];
+[runloop run];
+```
