@@ -21,6 +21,20 @@
     //http response content(data)
     NSLog(@"%@",[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
 }
+
+- (void)sendPost {
+    NSURL *url = [NSURL URLWithString:@"https://ip.cn/index.php"];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    //设置请求方法
+    request.HTTPMethod = @"POST";
+    //设置请求体
+    request.HTTPBody = [@"ip=1.1.1.1" dataUsingEncoding:NSUTF8StringEncoding];
+    [NSURLConnection sendAsynchronousRequest:request queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse * _Nullable response, NSData * _Nullable data, NSError * _Nullable connectionError) {
+        NSLog(@"%@",[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+        NSLog(@"%@",[NSThread currentThread]);
+    }];
+}
+
 - (void)sendAsync {
     //01创建url
     NSURL *url = [NSURL URLWithString:@"https://ip.cn/index.php?ip=1.1.1.1"];
