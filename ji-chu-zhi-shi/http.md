@@ -6,6 +6,28 @@
     
     
 ```objc
+//中文转码
+NSString *string = @"https://ip.cn/index.php?username=小强";
+string = [string stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+
+
+- (void)get{
+    //01创建url
+    NSURL *url = [NSURL URLWithString:@"https://ip.cn/index.php?ip=1.1.1.1"];
+    //02建立request
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    //03 创建会话对象
+    NSURLSession *session = [NSURLSession sharedSession];
+    
+    //04根据会话对象来创建请求task（任务）
+    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        NSLog(@"%@",[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+        NSLog(@"%@",[NSThread currentThread]);
+    }];
+    
+    //05执行请求任务
+    [dataTask resume];
+}
 
 - (void) sendSyn {
     //01创建url
@@ -80,4 +102,7 @@
     NSLog(@"didFailWithError");
 }
     
-    ```
+```
+    
+- NSURLSession
+    使用NSURLSession创建Task，执行Task
