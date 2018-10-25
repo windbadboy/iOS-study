@@ -106,3 +106,63 @@ string = [string stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
     
 - NSURLSession
     使用NSURLSession创建Task，执行Task
+    
+```objc
+
+- (void)get{
+    //01创建url
+    NSURL *url = [NSURL URLWithString:@"https://ip.cn/index.php?ip=1.1.1.1"];
+    //02建立request
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    //03 创建会话对象
+    NSURLSession *session = [NSURLSession sharedSession];
+    
+    //04根据会话对象来创建请求task（任务）
+    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        NSLog(@"%@",[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+        NSLog(@"%@",[NSThread currentThread]);
+    }];
+    
+    //05执行请求任务
+    [dataTask resume];
+}
+
+
+
+//使用urlsession代理
+- (void)delegate {
+    //01确定url
+    NSURL *url = [NSURL URLWithString:@"http://www.badteacher.club/indexsa.php?a=admin"];
+    
+    //02创建request对象
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    
+    //03创建session,delegateQueuel如果传nil，默认在子线程中执行。
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:self delegateQueue:[NSOperationQueue mainQueue]];
+    
+    //04根据session创建task
+    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request];
+    
+    //05执行task
+    [dataTask resume];
+}
+
+- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveResponse:(NSURLResponse *)response completionHandler:(void (^)(NSURLSessionResponseDisposition))completionHandler{
+    NSLog(@"didReceiveResponse");
+    //处理回调
+    completionHandler(NSURLSessionResponseAllow);
+    
+}
+- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data{
+    
+        NSLog(@"didReceiveData");
+    [self.resultData appendData:data];
+    
+}
+- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error{
+    
+        NSLog(@"didCompleteWithError");
+    NSLog(@"%@",[[NSString alloc] initWithData:self.resultData encoding:NSUTF8StringEncoding]);
+    
+}
+```
