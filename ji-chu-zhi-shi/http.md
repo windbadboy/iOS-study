@@ -166,3 +166,19 @@ string = [string stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
     
 }
 ```
+
+- 下载内容直接写入沙盒文件
+```objc
+    //拼接文件的存储路径（沙盒）+文件名
+    NSString *cache = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
+    NSString *fileName = [response suggestedFilename];
+    NSString *fullPath = [cache stringByAppendingPathComponent:fileName];
+    
+    //创建空文件
+    [[NSFileManager defaultManager] createFileAtPath:fullPath contents:nil attributes:nil];
+    
+    //创建文件句柄指针指向该文件
+    self.handle = [NSFileHandle fileHandleForWritingAtPath:fullPath];
+    [self.handle writeData:data];
+    [self.handle closeFile];
+```
